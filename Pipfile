@@ -9,6 +9,10 @@ autopep8 = "*"
 [packages]
 flask = "*"
 gunicorn = "*"
+psycopg2 = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+flask-script = "*"
 
 [requires]
 python_version = "3.8"
