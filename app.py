@@ -25,6 +25,7 @@ db = SQLAlchemy(app)
 
 q = Queue(connection=conn)
 
+from models import *
 
 def count_and_save_words(url):
 
