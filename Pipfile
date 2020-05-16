@@ -16,6 +16,8 @@ flask-script = "*"
 requests = "*"
 nltk = "*"
 beautifulsoup4 = "*"
+redis = "*"
+rq = "*"
 
 [requires]
 python_version = "3.8"
