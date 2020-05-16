@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 import operator
 import re
@@ -23,6 +24,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 q = Queue(connection=conn)
+
 
 def count_and_save_words(url):
 
@@ -69,23 +71,25 @@ def count_and_save_words(url):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    '''
-    Submit URL and create a job to extract words from raw html
-    '''
-    results = {}
-    if request.method == "POST":
-        # this import solves a rq bug which currently exists
-        from app import count_and_save_words
+    return render_template('index.html')
 
-        # get url that the person has entered
-        url = request.form['url']
-        if not url[:8].startswith(('https://', 'http://')):
-            url = 'http://' + url
-        job = q.enqueue_call(
-            func=count_and_save_words, args=(url,), result_ttl=5000
-        )
-        print(job.get_id())
-    return render_template('index.html', results=results)
+
+@app.route('/start', methods=['POST'])
+def get_counts():
+    # this import solves a rq bug which currently exists
+    from app import count_and_save_words
+
+    # get url
+    data = json.loads(request.data.decode())
+    url = data["url"]
+    if not url[:8].startswith(('https://', 'http://')):
+        url = 'http://' + url
+    # start job
+    job = q.enqueue_call(
+        func=count_and_save_words, args=(url,), result_ttl=5000
+    )
+    # return created job id
+    return job.get_id()
 
 
 @app.route("/results/<job_key>", methods=['GET'])
