@@ -17,3 +17,7 @@ last command I ran was \$ python manage.py db migrate
 ### Database
 
 connect to db `psql -U postgres`
+
+### Dyno config
+
+Worker and server currently run on the same dyno (small workload). Best to create separate dyno's for heavier workloads.
