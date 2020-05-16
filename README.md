@@ -21,3 +21,7 @@ connect to db `psql -U postgres`
 ### Dyno config
 
 Worker and server currently run on the same dyno (small workload). Best to create separate dyno's for heavier workloads.
+
+### Other notes
+
+Latest Redis introduces a breaking change (need to investigate)
