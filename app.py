@@ -13,7 +13,7 @@ from stop_words import stops
 from collections import Counter
 from bs4 import BeautifulSoup
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -26,6 +26,7 @@ db = SQLAlchemy(app)
 q = Queue(connection=conn)
 
 from models import *
+
 
 def count_and_save_words(url):
 
@@ -68,6 +69,11 @@ def count_and_save_words(url):
     except:
         errors.append("Unable to add item to database.")
         return {"error": errors}
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.route('/', methods=['GET', 'POST'])
