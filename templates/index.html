@@ -39,12 +39,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% raw %}
                                 <tr ng-repeat="element in wordcounts">
+                                    {% raw %}
                                     <td>{{ element[0] }}</td>
                                     <td>{{ element[1] }}</td>
+                                    {% endraw %}
                                 </tr>
-                                {% endraw %}
                             </tbody>
                         </table>
                     </div>

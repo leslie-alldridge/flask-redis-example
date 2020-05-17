@@ -14,7 +14,7 @@
           $log.log('test');
 
           // get the URL from the input
-          let userInput = $scope.url;
+          var userInput = $scope.url;
 
           // fire the API request
           $http
@@ -29,9 +29,9 @@
         };
 
         function getWordCount(jobID) {
-          let timeout = '';
+          var timeout = '';
 
-          let poller = function () {
+          var poller = function () {
             // fire another request
             $http
               .get('/results/' + jobID)
