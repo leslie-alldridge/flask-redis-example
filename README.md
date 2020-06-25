@@ -24,4 +24,4 @@ Worker and server currently run on the same dyno (small workload). Best to creat
 
 ### Other notes
 
-Latest Redis introduces a breaking change (need to investigate)
+Latest Redis introduces a breaking change (need to investigate at a later date) 
